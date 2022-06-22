@@ -13,7 +13,7 @@ def run(tf, nsteps, sp, theta_omega0, noise, Kp, Ki, Kd):
     # Kp, Ki, Kd: PID parameters
 
     # Define the constant and initialize the model
-    eta = 0.25 # damping factor
+    eta = 0.1 # damping factor (0.001)
     m_b = 0.01 # mass of the ball
     m_c = 500 # mass of the car
     g = 9.8 # gravity
@@ -42,7 +42,6 @@ def run(tf, nsteps, sp, theta_omega0, noise, Kp, Ki, Kd):
     # simulate with ODEINT
     for i in range(nsteps):
         
-        u_store[i] = u
         v_store[i] = v0
         sp_store[i] = sp[i]
         omega_store[i] = theta_omega0[1] 
@@ -62,7 +61,6 @@ def run(tf, nsteps, sp, theta_omega0, noise, Kp, Ki, Kd):
         #u = Kp*error + Ki * sum_int # PI controller (10,50)
         #u = Kp*error - Kd * (numerator_D/(delta_t)) # PD controller
         u = Kp*error + Ki * sum_int - Kd * (numerator_D/(delta_t)) # PID controller # (10,50,30)
-
         # Bounds for the controlled variable
         if u >= 100.0:
             u = 100.0
@@ -70,7 +68,8 @@ def run(tf, nsteps, sp, theta_omega0, noise, Kp, Ki, Kd):
         if u <= -50.0:
             u = -50.0
             sum_int = sum_int - error*delta_t
-        
+        u_store[i] = u
+
         theta_omega = odeint(model.ode_angle,theta_omega0,[0,delta_t],args=(u,100))
         theta_omega0 = theta_omega[-1]
 

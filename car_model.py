@@ -15,7 +15,7 @@ class Model():
         self.r = r #1 # radius of the pendulum
 
     def ode_angle(self, theta, t, u, Fp):
-        dSTheta_dSt = [theta[1], (((Fp*u/self.m_c)*np.cos(theta[0])) - (self.eta*theta[1]*self.r)/self.m_b - (np.sin(theta[0])*self.g))]
+        dSTheta_dSt = [theta[1], (((Fp*u/self.m_c)*np.cos(theta[0])) - (self.eta*theta[1]*self.r)/self.m_b - (np.sin(theta[0])*self.g))/self.r]
         return dSTheta_dSt
 
     def ode_velocity(self, v, t, u, Fp):
