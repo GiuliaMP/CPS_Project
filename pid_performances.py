@@ -28,3 +28,10 @@ def settling_time(x, time):
     while x[i] > x[-1] + 0.001 or x[i] < x[-1] - 0.001:
         i+=1
     return round(time[i],3)
+
+
+def print_performances(theta_store, sp_store, ts):
+    print(f'overshoot: {overshoot(theta_store, sp_store)}')
+    print(f'rise time: {rise_time(theta_store, sp_store, ts)}')
+    print(f'steady state error: {steady_state_error(theta_store, sp_store)}')
+    print(f'settling time: {settling_time(theta_store, ts)}')
