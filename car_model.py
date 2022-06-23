@@ -22,7 +22,7 @@ class Model():
         # inputs
         #  v    = vehicle velocity (m/s)
         #  t    = time (sec)
-        #  u    = gas pedal position (-50% to 100%) 
+        #  u    = Controlled variable
         #Fp     # thrust parameter (N/%pedal)
         Cd = 0.24     # drag coefficient
         rho = 1.225  # air density (kg/m^3)

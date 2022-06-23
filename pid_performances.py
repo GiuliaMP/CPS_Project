@@ -22,10 +22,10 @@ def steady_state_error(x, ref):
     return round(np.abs(x[-1] - ref[-1]),3)
 
 
-def settling_time(x, time):
+def settling_time(x, time): # check, se c'è troppa oscillazione non funziona
     """Time at which the output reaches its steady state value"""
     i = 0
-    while x[i] > x[-1] + 0.001 or x[i] < x[-1] - 0.001:
+    while x[i] > x[-1] + 0.0005 or x[i] < x[-1] - 0.0005:
         i+=1
     return round(time[i],3)
 
